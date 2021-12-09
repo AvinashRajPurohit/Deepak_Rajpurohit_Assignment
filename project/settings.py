@@ -47,12 +47,6 @@ INSTALLED_APPS = [
 
 ]
 
-CORS_ORIGIN_WHITELIST = [
-    "http://localhost:8000",
-    "http://myapp963635.herokuapp.com",
-    "http://127.0.0.1:8000"
-]
-
 AUTH_USER_MODEL='users.Users'
 
 
@@ -171,4 +165,3 @@ SIMPLE_JWT = {
 }
 
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
-FILE_UPLOAD_MAX_MEMORY_SIZE = 1000 * 1000 * 1000
