@@ -20,10 +20,10 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/4.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = os_environ.get("SECRET_KEY")
+SECRET_KEY = os_environ.get("SECRET_KEY", 'django-insecure-_p#p@b9^&nj0c$ogl2hx3gbw4^d#c!&4g66l%q&1e%k@xw7e#n')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ["localhost", "myapp963635.herokuapp.com", '127.0.0.1']
 
@@ -133,8 +133,12 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.0/howto/static-files/
 
+from os import path as os_path
 STATIC_URL = 'static/'
 STATIC_ROOT = BASE_DIR / 'static'
+# STATICFILES_DIRS = (
+#     os_path.join(BASE_DIR, "static"),
+# )
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field
 
