@@ -20,12 +20,12 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/4.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = os_environ.get("SECRET_KEY")
+SECRET_KEY = os_environ.get("SECRET_KEY", 'django-insecure-_p#p@b9^&nj0c$ogl2hx3gbw4^d#c!&4g66l%q&1e%k@xw7e#n')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ["localhost", "myapp963635.herokuapp.com"]
+ALLOWED_HOSTS = ["localhost", "myapp963635.herokuapp.com", '127.0.0.1']
 
 
 # Application definition
@@ -37,9 +37,24 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'drf_yasg',
     'rest_framework',
-    'first_app'
+    'sales_app',
+    'rest_framework_simplejwt.token_blacklist',
+    'users',
+    'crispy_forms',
+
+
 ]
+
+CORS_ORIGIN_WHITELIST = [
+    "http://localhost:8000",
+    "https://myapp963635.herokuapp.com",
+    "http://127.0.0.1:8000"
+]
+
+AUTH_USER_MODEL='users.Users'
+
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -124,3 +139,32 @@ STATIC_ROOT = BASE_DIR / 'static'
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+
+
+REST_FRAMEWORK = {
+   'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework_simplejwt.authentication.JWTAuthentication',
+    )
+}
+
+
+SWAGGER_SETTINGS = {
+    'SECURITY_DEFINITIONS': {
+        'Bearer': {
+            'type': 'apiKey',
+            'name': 'Authorization',
+            'in': 'header'
+        }
+    }
+}
+
+import datetime
+
+SIMPLE_JWT = {
+    'ACCESS_TOKEN_LIFETIME': datetime.timedelta(minutes=80),
+    'REFRESH_TOKEN_LIFETIME': datetime.timedelta(days=1),
+}
+
+CRISPY_TEMPLATE_PACK = 'bootstrap4'
+FILE_UPLOAD_MAX_MEMORY_SIZE = 1000 * 1000 * 1000

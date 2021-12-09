@@ -1,0 +1,48 @@
+{% extends "base.html" %}{% load crispy_forms_tags %} {% block title%} Update User {% endblock title %} {% block content%}
+<form action="{% url 'update-user' user_id %}" method="POST" class="form">
+    {% csrf_token %}
+    <div class="card mt-4 ">
+        <h5 class="card-title text-center mt-4">Update Sales User</h5>
+        <div class="form-row ml-4 mr-4">
+            <div class="form-group col-md-4 mb-0">
+                {{ user_form.name|as_crispy_field }}
+            </div>
+            <div class="form-group col-md-4 mb-0">
+                {{ user_form.gender|as_crispy_field }}
+            </div>
+            <div class="form-group col-md-4 mb-0">
+                {{ user_form.age|as_crispy_field }}
+            </div>
+        </div>
+        <div class="form-row ml-4 mr-4">
+            <div class="form-group col-md-4 mb-0">
+                {{ user_form.email|as_crispy_field }}
+            </div>
+            <div class="form-group col-md-4 mb-0">
+                {{ user_form.country|as_crispy_field }}
+            </div>
+            <div class="form-group col-md-4 mb-0">
+                {{ user_form.city|as_crispy_field }}
+            </div>
+        </div>
+        <div>
+            <button type="submit" name='user_submit' class="btn btn-danger mt-2 ml-4 mb-2 ">Update User</button>
+        </div>
+</form>
+<hr>
+
+<form class="form mt-4" action="{% url 'update-user' user_id%}" enctype="multipart/form-data" method="POST">
+    {% csrf_token %}
+    <div class="row ml-4 mt-4">
+        <div class="col-md-4 mt-2">
+            <h5>Add Sales Data here via uploading the file: </h4>
+        </div>
+
+        <div class="col-md-5 mb-4">
+            <input type="file" name='sales_file' accept=".csv" required>
+            <button type="submit" name='sales_submit' class="btn btn-primary">Add Sales Data</button>
+        </div>
+    </div>
+</form>
+</div>
+{% endblock content %}
