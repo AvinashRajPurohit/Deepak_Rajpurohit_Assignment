@@ -18,7 +18,7 @@ def index(request):
     form = UserRegistrationForm(request.POST)
     if form.is_valid():
       f = form.save(commit=False)
-      f.set_password("admin@123")
+      f.set_password("trial_application")
       f.save()
       messages.warning(request, "Sales User has been add successfully...")
       return redirect("add-user")
