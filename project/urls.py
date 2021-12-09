@@ -24,7 +24,7 @@ from django.conf.urls.static import static
 schema_view = get_schema_view(
     openapi.Info(
         title="Sales Management System",
-        default_version='v1',
+        default_version='v2',
         description="This application handles operations of SMS",
         contact=openapi.Contact(email="deepakrajpurohit945@gmail.com"),
         license=openapi.License(name="Test License"),
@@ -36,9 +36,9 @@ schema_view = get_schema_view(
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('sales/', include('sales_app.urls')),
-    path('api/v1/users/', include('users.urls')),
-    path('', schema_view.with_ui('swagger',
+    path('', include('sales_app.urls')),
+    path('api/v2/', include('users.urls')),
+    path('docs/', schema_view.with_ui('swagger',
                                  cache_timeout=0), name='schema-swagger-ui'),
 
     path('api/api.json/', schema_view.without_ui(cache_timeout=0),

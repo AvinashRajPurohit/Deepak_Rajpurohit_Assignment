@@ -23,7 +23,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = os_environ.get("SECRET_KEY")
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ["localhost", "myapp963635.herokuapp.com", '127.0.0.1']
 
@@ -49,7 +49,7 @@ INSTALLED_APPS = [
 
 CORS_ORIGIN_WHITELIST = [
     "http://localhost:8000",
-    "https://myapp963635.herokuapp.com",
+    "http://myapp963635.herokuapp.com",
     "http://127.0.0.1:8000"
 ]
 

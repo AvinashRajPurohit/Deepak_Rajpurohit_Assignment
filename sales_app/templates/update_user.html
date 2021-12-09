@@ -1,5 +1,5 @@
-{% extends "base.html" %}{% load crispy_forms_tags %} {% block title%} Update User {% endblock title %} {% block content%}
-<form action="{% url 'update-user' user_id %}" method="POST" class="form">
+{% extends "base.html" %}{% load crispy_forms_tags %} {% block title%} Update User & Sales{% endblock title %} {% block content%}
+<form action="{% url 'update-user-sales' user_id %}" method="POST" class="form">
     {% csrf_token %}
     <div class="card mt-4 ">
         <h5 class="card-title text-center mt-4">Update Sales User</h5>
@@ -31,7 +31,7 @@
 </form>
 <hr>
 
-<form class="form mt-4" action="{% url 'update-user' user_id%}" enctype="multipart/form-data" method="POST">
+<form class="form mt-4" action="{% url 'update-user-sales' user_id%}" enctype="multipart/form-data" method="POST">
     {% csrf_token %}
     <div class="row ml-4 mt-4">
         <div class="col-md-4 mt-2">

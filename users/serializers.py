@@ -1,8 +1,9 @@
 from django.contrib import auth
+from django.db.models import fields
 from rest_framework.exceptions import AuthenticationFailed
 from rest_framework_simplejwt.tokens import RefreshToken, TokenError
 from rest_framework import serializers
-from users.models import Users
+from users.models import City, Country, Users
 
 class LoginSerializer(serializers.ModelSerializer):
 
@@ -73,3 +74,39 @@ class UserSerializer(serializers.ModelSerializer):
               'first_name', 'last_name', 
               'email', 'gender', 'age',
               'country', 'city']
+              
+    def update(self, instance, validated_data):
+        password = validated_data.pop('password', None)
+        for (key, value) in validated_data.items():
+            setattr(instance, key, value)
+        if password is not None:
+            instance.set_password(password)
+        instance.save()
+        return instance
+
+
+
+class CitySerializer(serializers.ModelSerializer):
+  class Meta:
+    model = City
+    fields = '__all__'
+
+
+class CountrySerializer(serializers.ModelSerializer):
+    cities = serializers.SerializerMethodField()
+
+    class Meta:
+      model = Country
+      fields = ['name', 'cities']
+    
+
+    def get_cities(self, obj):
+      cities = City.objects.filter(
+                  country=obj,
+              )
+
+      serializer = CitySerializer(cities, many=True)
+
+      return serializer.data
+
+

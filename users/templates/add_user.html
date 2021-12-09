@@ -1,0 +1,44 @@
+{% extends "base.html" %}{% load crispy_forms_tags %} {% block title%} Index {% endblock title %} {% block content%}
+<div class="card mt-4">
+    <h5 class="card-title text-center mt-4">Add Sales User</h5>
+    <form action="{% url  'add-user' %}" method="POST" class="form mt-4">
+        {% csrf_token %}
+
+
+        <div class="form-row ml-4 mr-4">
+            <div class="form-group col-md-3 mb-0">
+                {{ user_form.email|as_crispy_field }}
+            </div>
+            <div class="form-group col-md-3 mb-0">
+                <div id="div_id_password" class="form-group">
+                    <label for="id_passord" class="">
+                            Password</label>
+                    <div class="">
+                        <input type="passowrd" name="password" maxlength="50" class="form-control textinput textInput form-control" id="id_password" placeholder="provide this password to user...">
+                    </div>
+                </div>
+            </div>
+            <div class="form-group col-md-3 mb-0">
+                {{ user_form.gender|as_crispy_field }}
+            </div>
+            <div class="form-group col-md-3 mb-0">
+                {{ user_form.age|as_crispy_field }}
+            </div>
+        </div>
+        <div class="form-row ml-4 mr-4">
+            <div class="form-group col-md-4 mb-0">
+                {{ user_form.name|as_crispy_field }}
+            </div>
+            <div class="form-group col-md-4 mb-0">
+                {{ user_form.country|as_crispy_field }}
+            </div>
+            <div class="form-group col-md-4 mb-0">
+                {{ user_form.city|as_crispy_field }}
+            </div>
+        </div>
+        <div>
+            <button type="submit" class="btn btn-danger mt-2 ml-4 mb-2 ">Add User</button>
+        </div>
+    </form>
+</div>
+{% endblock content %}

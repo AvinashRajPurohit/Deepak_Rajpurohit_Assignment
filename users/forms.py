@@ -12,7 +12,7 @@ class UserRegistrationForm(forms.ModelForm):
             "age",
             "gender",
             "country",
-            "city"
+            "city",
         ]
 
     def __init__(self, *args, **kwargs):
