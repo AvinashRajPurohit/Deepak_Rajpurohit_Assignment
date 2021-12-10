@@ -47,3 +47,6 @@ urlpatterns = [
                                        cache_timeout=0), name='schema-redoc'),
 
 ]+ static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+
+if settings.DEBUG == True:
+    urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
