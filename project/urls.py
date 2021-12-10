@@ -29,6 +29,7 @@ schema_view = get_schema_view(
         contact=openapi.Contact(email="deepakrajpurohit945@gmail.com"),
         license=openapi.License(name="Test License"),
     ),
+    url='https://myapp963635.herokuapp.com/'
     public=True,
     permission_classes=(permissions.AllowAny,),
 )
