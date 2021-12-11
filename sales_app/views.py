@@ -37,13 +37,8 @@ def update_user_and_sales_data(request, id):
   """
   user = get_object_or_404(Users, id=id)
   form = UserRegistrationForm(instance=user)
-
-  print(request.POST)
-  print(request.method)
   if request.method == 'POST':
     if 'sales_submit' in request.POST:
-      print('here')
-      print(request.FILES)
       csv_file = request.FILES.get("sales_file")
       dict_data = pd.read_csv(csv_file).to_dict('records')
       insert_data = insert_data_in_sales_model(dict_data, id)

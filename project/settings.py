@@ -20,7 +20,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/4.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = os_environ.get("SECRET_KEY")
+SECRET_KEY = os_environ.get("SECRET_KEY",'django-insecure-_p#p@b9^&nj0c$ogl2hx3gbw4^d#c!&4g66l%q&1e%k@xw7e#n')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -47,6 +47,8 @@ INSTALLED_APPS = [
 
 
 ]
+
+CSRF_TRUSTED_ORIGINS = ["http://myapp963635.herokuapp.com", "https://myapp963635.herokuapp.com"]
 
 
 AUTH_USER_MODEL='users.Users'

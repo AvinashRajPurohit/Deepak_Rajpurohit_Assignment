@@ -31,7 +31,7 @@
 </form>
 <hr>
 
-<form class="form mt-4" action="{% url 'update-user-sales' user_id%}" enctype="multipart/form-data" method="POST">
+<form class="form mt-4 mr-4" action="{% url 'update-user-sales' user_id%}" enctype="multipart/form-data" method="POST">
     {% csrf_token %}
     <div class="row ml-4 mt-4">
         <div class="col-md-4 mt-3">
