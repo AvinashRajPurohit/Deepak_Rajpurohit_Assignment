@@ -29,6 +29,7 @@ schema_view = get_schema_view(
         contact=openapi.Contact(email="deepakrajpurohit945@gmail.com"),
         license=openapi.License(name="Test License"),
     ),
+    url='https://myapp963635.herokuapp.com/',
     public=True,
     permission_classes=(permissions.AllowAny,),
 )
@@ -47,3 +48,6 @@ urlpatterns = [
                                        cache_timeout=0), name='schema-redoc'),
 
 ]+ static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+
+if settings.DEBUG == True:
+    urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

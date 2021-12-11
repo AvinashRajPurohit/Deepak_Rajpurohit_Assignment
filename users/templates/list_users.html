@@ -1,4 +1,4 @@
-{% extends "base.html" %}{% load crispy_forms_tags %} {% block title%} Index {% endblock title %} {% block content%}
+{% extends "base.html" %}{% load crispy_forms_tags %} {% block title%} List Users {% endblock title %} {% block content%}
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js "></script>
@@ -23,6 +23,7 @@
                 <th> Country</th>
                 <th>City</th>
                 <th>Update & Sales</th>
+                <th>Statistics</th>
             </tr>
         </thead>
         <tbody>
@@ -36,6 +37,10 @@
                 <td class="text-center">
 
                     <a href="{% url 'update-user-sales' u.id %}" class="btn btn-danger btn-sm">Update</a>
+                </td>
+                <td class="text-center">
+
+                    <a href="{% url 'user-stats' u.id %}" class="btn btn-danger btn-sm">Analysis</a>
                 </td>
 
             </tr>

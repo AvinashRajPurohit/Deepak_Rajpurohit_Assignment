@@ -12,10 +12,16 @@
     <title>SMS - {% block title%} {% endblock title %}</title>
 </head>
 
+<style>
+    #page-content {
+        flex: 1 0 auto;
+    }
+    /* Other Classes for Page Styling */
+</style>
 
 <body>
     <nav style="background-color: #e92063;" class="navbar navbar-expand-lg navbar-light">
-        <a class="navbar-brand text-white" href="#"><b>Sales</b><small>-Stats</small></a>
+        <a class="navbar-brand text-white" href="{% url 'index' %}"><b>Sales</b><small>-Stats</small></a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
@@ -23,7 +29,7 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item active">
-                    <a class="nav-link text-white" href="#">Home <span class="sr-only">(current)</span></a>
+                    <a class="nav-link text-white" href="{% url 'index' %}">Home <span class="sr-only">(current)</span></a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link text-white" href="{% url 'add-user' %}">Add-User</a>
@@ -58,6 +64,11 @@
 
     </div>
 
+    <footer id="sticky-footer" class="mt-4 flex-shrink-0 py-4 bg-dark text-white-50">
+        <div class="container text-center text-white">
+            <small>Copyright &copy; Deepak Rajpuohit</small>
+        </div>
+    </footer>
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js " integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN " crossorigin="anonymous "></script>

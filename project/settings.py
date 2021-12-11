@@ -43,15 +43,11 @@ INSTALLED_APPS = [
     'rest_framework_simplejwt.token_blacklist',
     'users',
     'crispy_forms',
+    "corsheaders",
 
 
 ]
 
-CORS_ORIGIN_WHITELIST = [
-    "http://localhost:8000",
-    "http://myapp963635.herokuapp.com",
-    "http://127.0.0.1:8000"
-]
 
 AUTH_USER_MODEL='users.Users'
 
@@ -60,6 +56,7 @@ MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'whitenoise.middleware.WhiteNoiseMiddleware',  # whitenoise middleware
     'django.contrib.sessions.middleware.SessionMiddleware',
+    "corsheaders.middleware.CorsMiddleware",
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
@@ -135,16 +132,35 @@ USE_TZ = True
 
 from os import path as os_path
 STATIC_URL = 'static/'
-STATIC_ROOT = BASE_DIR / 'static'
-# STATICFILES_DIRS = (
-#     os_path.join(BASE_DIR, "static"),
-# )
+# STATIC_ROOT = BASE_DIR / 'static'
+STATICFILES_DIRS = (
+    os_path.join(BASE_DIR, "static"),
+)
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
+CORS_ALLOW_METHODS = [
+    "DELETE",
+    "GET",
+    "OPTIONS",
+    "PATCH",
+    "POST",
+    "PUT",
+]
 
+CORS_ALLOW_HEADERS = [
+    "accept",
+    "accept-encoding",
+    "authorization",
+    "content-type",
+    "dnt",
+    "origin",
+    "user-agent",
+    "x-csrftoken",
+    "x-requested-with",
+]
 
 REST_FRAMEWORK = {
    'DEFAULT_AUTHENTICATION_CLASSES': (
@@ -162,7 +178,7 @@ SWAGGER_SETTINGS = {
         }
     }
 }
-
+CORS_ALLOW_ALL_ORIGINS = True
 import datetime
 
 SIMPLE_JWT = {
@@ -171,4 +187,3 @@ SIMPLE_JWT = {
 }
 
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
-FILE_UPLOAD_MAX_MEMORY_SIZE = 1000 * 1000 * 1000

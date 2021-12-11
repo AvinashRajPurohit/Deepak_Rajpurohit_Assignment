@@ -87,6 +87,7 @@ def add_user(request):
   return render(request, 'add_user.html', context)
 
 
+
 def list_users(request):
   """
   This view will give the list all sales users

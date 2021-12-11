@@ -1,14 +1,15 @@
 from django.urls import path
-from sales_app.views import (update_user_and_sales_data, 
+from sales_app.views import (index, update_user_and_sales_data, 
                              get_statistics_info, 
                              StatisticsView,
                              SalesListView,
                              sales_delete,
                              SaleUpdateAPIView,
-                             SaleCreateAPIView)
+                             SaleCreateAPIView, index)
 
 urlpatterns = [
-  path("sales/update/<int:id>/user/sales", update_user_and_sales_data, name='update-user-sales'),
+  path('', index, name='index'),
+  path("sales/update/<int:id>/user/", update_user_and_sales_data, name='update-user-sales'),
   path("sales/statistics/<int:user_id>", get_statistics_info, name="user-stats"),
   path("sales/statistics/", StatisticsView.as_view(), name='stats'),
   path("sales/list/", SalesListView.as_view(), name='sales-list'),

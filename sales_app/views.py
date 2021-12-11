@@ -49,13 +49,13 @@ def update_user_and_sales_data(request, id):
       insert_data = insert_data_in_sales_model(dict_data, id)
       print(insert_data)
       messages.success(request, "Sales data has been inserted successfully...")
-      return redirect("update-user-sales", id=id)
+      return redirect("user-stats", user_id=id)
     elif 'user_submit' in request.POST:
       form = UserRegistrationForm(request.POST, instance=user)
       if form.is_valid():
         form.save()
         messages.success(request, "Sales User has been updated successfully...")
-        return redirect("update-user-sales", id=id)
+        return redirect("user-stats", user_id=id)
       else:
         print(form.errors)
   context = {
@@ -200,5 +200,12 @@ class SaleUpdateAPIView(generics.UpdateAPIView):
 
 
 class SaleCreateAPIView(generics.CreateAPIView):
+  """
+  This api view for creating the sales object
+  """
   queryset = Sales.objects.all()
   serializer_class = SalesSerializer
+
+
+def index(request):
+  return render(request, 'index.html')
