@@ -1,10 +1,9 @@
 from django.db import models
 from django.contrib.auth.models import AbstractBaseUser, BaseUserManager
-from rest_framework_simplejwt.tokens import RefreshToken
 
 # Create your models here.
-GENDER_CHOICES = (("MALE", "male"),
-                  ("FEMALE", "female"))
+GENDER_CHOICES = (("male", "male"),
+                  ("female", "female"))
 
 
 class Country(models.Model):
@@ -95,13 +94,10 @@ class Users(AbstractBaseUser):
         return str(self.email)
 
 
-    def has_perm(self, perm, obj=None): return self.is_superuser
+    # For checking permissions. to keep it simple all admin have ALL permissons
+    def has_perm(self, perm, obj=None):
+        return self.is_admin
 
-    def has_module_perms(self, app_label): return self.is_superuser
-
-    def tokens(self):
-      refresh = RefreshToken.for_user(self)
-      return {
-          'refresh': str(refresh),
-          'access': str(refresh.access_token)
-      }
+    # Does this user have permission to view this app? (ALWAYS YES FOR SIMPLICITY)
+    def has_module_perms(self, app_label):
+        return True
