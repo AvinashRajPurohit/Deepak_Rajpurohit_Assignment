@@ -91,6 +91,7 @@ class LogoutAPIView(generics.GenericAPIView):
     """
     This will logout the user.
     """
+    serializer_class = UserSerializer
     permission_classes = (permissions.IsAuthenticated,)
 
     def post(self, request):
@@ -100,7 +101,7 @@ class LogoutAPIView(generics.GenericAPIView):
         """
         this function will logout the user...
         """
-        user_serializer = UserSerializer(request.user)
+        user_serializer = self.serializer_class(request.user)
         try:
             request.user.auth_token.delete()
         except (AttributeError, ObjectDoesNotExist):

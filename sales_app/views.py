@@ -8,7 +8,7 @@ from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import generics, permissions
 from sales_app.utils import get_sales_plot
-from sales_app.serializers import SalesSerializer
+from sales_app.serializers import SalesSerializer, SalesUpdateSerializer
 from django.shortcuts import (get_object_or_404,
                               redirect, render)
 
@@ -171,14 +171,24 @@ class StatisticsView(APIView):
             return str(e)
 
 
-class SalesRetrieveUpdateDestroyView(generics.RetrieveUpdateDestroyAPIView):
+class SalesRetrieveUpdateView(generics.RetrieveUpdateAPIView):
     """
     This api help to get update and delete the sales object
     """
     lookup_field = 'id'
     queryset = Sales.objects.all()
-    serializer_class = SalesSerializer
+    serializer_class = SalesUpdateSerializer
 
+    def put(self, request, *args, **kwargs):
+        kwargs['partial'] = True
+        return self.update(request, *args, **kwargs)
+
+
+class SalesDestroyView(generics.DestroyAPIView):
+    lookup_field = 'id'
+    queryset = Sales.objects.all()
+    serializer_class = SalesUpdateSerializer
+  
 
 class SaleListCreateAPIView(generics.ListCreateAPIView):
     """
