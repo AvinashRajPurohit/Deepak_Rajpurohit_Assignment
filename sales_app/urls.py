@@ -10,7 +10,5 @@ urlpatterns = [
   path("sales/statistics/<int:user_id>", get_statistics_info, name="user-stats"),
   path("sale_statistics/", StatisticsView.as_view(), name='stats'),
   path("sales/", SaleListCreateAPIView.as_view(), name='sales-list'),
-  path("sales/<int:id>/", SalesRetrieveUpdateDestroyView.as_view(), name='delete-sale'),
-  path("sales/<int:id>", SalesRetrieveUpdateDestroyView.as_view(), name='update-sale'),
-  path('sales/', SaleListCreateAPIView.as_view(), name='sales-create')
+  path("sales/<int:id>/", SalesRetrieveUpdateDestroyView.as_view(), name='curd-sale'),
 ]

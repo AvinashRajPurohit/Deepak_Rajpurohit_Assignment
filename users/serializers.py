@@ -50,10 +50,10 @@ class CountrySerializer(serializers.ModelSerializer):
         model = Country
         fields = ['id', 'name', 'cities']
 
-        def get_cities(self, obj):
-            cities = City.objects.filter(
-                        country=obj,
-                    )
-            serializer = CitySerializer(cities, many=True)
+    def get_cities(self, obj):
+        cities = City.objects.filter(
+                    country=obj,
+                )
+        serializer = CitySerializer(cities, many=True)
 
-            return serializer.data
+        return serializer.data
