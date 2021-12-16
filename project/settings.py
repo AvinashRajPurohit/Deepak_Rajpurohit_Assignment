@@ -12,6 +12,8 @@ https://docs.djangoproject.com/en/4.0/ref/settings/
 
 from pathlib import Path
 from os import environ as os_environ
+from os import path as os_path
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -39,17 +41,19 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'drf_yasg',
     'rest_framework',
+    'rest_framework.authtoken',
     'sales_app',
-    'rest_framework_simplejwt.token_blacklist',
     'users',
     'crispy_forms',
     "corsheaders",
 
-
 ]
 
+CSRF_TRUSTED_ORIGINS = ["http://myapp963635.herokuapp.com",
+                        "https://myapp963635.herokuapp.com"]
 
-AUTH_USER_MODEL='users.Users'
+
+AUTH_USER_MODEL = 'users.Users'
 
 
 MIDDLEWARE = [
@@ -129,13 +133,13 @@ USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.0/howto/static-files/
+STATIC_ROOT = os_path.join(BASE_DIR, 'static')
+STATIC_URL = '/static/'
 
-from os import path as os_path
-STATIC_URL = 'static/'
-# STATIC_ROOT = BASE_DIR / 'static'
-STATICFILES_DIRS = (
-    os_path.join(BASE_DIR, "static"),
-)
+# if DEBUG:
+#     STATICFILES_DIRS = (
+#         os_path.join(BASE_DIR, "static"),
+#     )
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field
 
@@ -162,13 +166,10 @@ CORS_ALLOW_HEADERS = [
     "x-requested-with",
 ]
 
-REST_FRAMEWORK = {
-   'DEFAULT_AUTHENTICATION_CLASSES': (
-        'rest_framework_simplejwt.authentication.JWTAuthentication',
-    )
-}
 
-
+CORS_ALLOW_ALL_ORIGINS = True
+TOKEN_EXPIRED_AFTER_SECONDS = 1000
+CRISPY_TEMPLATE_PACK = 'bootstrap4'
 SWAGGER_SETTINGS = {
     'SECURITY_DEFINITIONS': {
         'Bearer': {
@@ -178,12 +179,9 @@ SWAGGER_SETTINGS = {
         }
     }
 }
-CORS_ALLOW_ALL_ORIGINS = True
-import datetime
 
-SIMPLE_JWT = {
-    'ACCESS_TOKEN_LIFETIME': datetime.timedelta(minutes=80),
-    'REFRESH_TOKEN_LIFETIME': datetime.timedelta(days=1),
+REST_FRAMEWORK = {
+   'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework.authentication.TokenAuthentication',
+    )
 }
-
-CRISPY_TEMPLATE_PACK = 'bootstrap4'

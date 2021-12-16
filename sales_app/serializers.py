@@ -1,9 +1,26 @@
-from django.db.models import fields
 from rest_framework import serializers
 from sales_app.models import Sales
 
-class SalesSerializer(serializers.ModelSerializer):
 
-  class Meta:
-    model = Sales
-    fields = '__all__'
+class SalesSerializer(serializers.ModelSerializer):
+    user_id = serializers.IntegerField()
+
+    class Meta:
+        model = Sales
+        exclude = ('user',)
+
+    def get_user_id(self, obj):
+        user_id = self.user.id
+        return user_id
+
+
+class SalesUpdateSerializer(serializers.ModelSerializer):
+    user_id = serializers.IntegerField()
+
+    class Meta:
+        model = Sales
+        exclude = ('user', 'id')
+
+    def get_user_id(self, obj):
+        user_id = self.user.id
+        return user_id   

@@ -31,18 +31,51 @@
 </form>
 <hr>
 
-<form class="form mt-4" action="{% url 'update-user-sales' user_id%}" enctype="multipart/form-data" method="POST">
+<form class="form mt-4 mr-4" action="{% url 'update-user-sales' user_id%}" enctype="multipart/form-data" method="POST">
     {% csrf_token %}
     <div class="row ml-4 mt-4">
-        <div class="col-md-4 mt-2">
+        <div class="col-md-4 mt-3">
             <h5>Add Sales Data here via uploading the file: </h4>
         </div>
 
-        <div class="col-md-5 mb-4">
-            <input type="file" name='sales_file' accept=".csv" required>
-            <button type="submit" name='sales_submit' class="btn btn-primary">Add Sales Data</button>
+        <div class="col-md-4 mt-1">
+            <input type="file" id="fileUpload" class="form-control" name='sales_file' accept=".csv" required>
+        </div>
+        <div class="col-md-2 mb-4 mr-4 mt-2">
+            <button type="submit" name='sales_submit' style="background-color: #e92063; color:white" class="btn-sm btn">Add Sales Data</button>
+
         </div>
     </div>
 </form>
 </div>
+
+<textarea class="d-inline p-2 mt-4" style="width: 100%;" name="" id="texcv" cols="30" rows="10" placeholder="No Data Available for now when you will upload the csv file you can view that..."></textarea>
+
+
+<script type="text/javascript">
+    var file_upload = document.getElementById('fileUpload');
+    file_upload.onchange = function() {
+        var fileUpload = document.getElementById("fileUpload");
+        var regex = /^([a-zA-Z0-9\s_\\.\-:])+(.csv|.txt)$/;
+        if (regex.test(fileUpload.value.toLowerCase())) {
+            if (typeof(FileReader) != "undefined") {
+                var reader = new FileReader();
+                reader.onload = function(e) {
+                    var rows = e.target.result.split("\n");
+                    document.getElementById("texcv").value = "";
+                    for (var i = 0; i < rows.length; i++) {
+                        var cells = rows[i].split(",");
+                        document.getElementById("texcv").value += rows[i];
+                    }
+                }
+                reader.readAsText(fileUpload.files[0]);
+            } else {
+                alert("This browser does not support HTML5.");
+            }
+        } else {
+            alert("Please upload a valid CSV file.");
+        }
+    }
+</script>
+
 {% endblock content %}

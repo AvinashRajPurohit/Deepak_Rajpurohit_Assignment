@@ -1,11 +1,5 @@
 {% extends "base.html" %}{% load crispy_forms_tags %} {% block title%} List Users {% endblock title %} {% block content%}
-<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js "></script>
-<link rel="stylesheet " href="https://cdn.datatables.net/1.10.21/css/dataTables.bootstrap4.min.css ">
-<script src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.min.js ">
-</script>
-<script src="https://cdn.datatables.net/1.10.21/js/dataTables.bootstrap4.min.js ">
+
 </script>
 </head>
 
@@ -13,43 +7,40 @@
     <div class="mt-4">
         <h4 class="text-center">Users List & Actions</h4>
     </div>
-    <table id="myTable" class="table table-bordered mt-4" style="width:100% ">
-        <thead>
-            <tr>
+    <div class="table-responsive mt-4">
+        <table class="table mt-4">
+            <thead class="thead-light">
+                <tr>
+                    <th> Email </th>
+                    <th>User id</th>
+                    <th> Age </th>
+                    <th> Country</th>
+                    <th>City</th>
+                    <th>Update & Sales</th>
+                    <th>Statistics</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for u in users %}
+                <tr scope="row ">
+                    <td> {{u.email}}</td>
+                    <td> {{u.id}} </td>
+                    <td> {{u.age}} </td>
+                    <td> {{u.country.name}} </td>
+                    <td> {{u.city.name}} </td>
+                    <td class="text-center ">
 
-                <th> Email </th>
-                <th>User id</th>
-                <th> Age </th>
-                <th> Country</th>
-                <th>City</th>
-                <th>Update & Sales</th>
-                <th>Statistics</th>
-            </tr>
-        </thead>
-        <tbody>
-            {% for u in users %}
-            <tr>
-                <td> {{u.email}}</td>
-                <td> {{u.id}} </td>
-                <td> {{u.age}} </td>
-                <td> {{u.country.name}} </td>
-                <td> {{u.city.name}} </td>
-                <td class="text-center">
+                        <a href="{% url 'update-user-sales' u.id %} " class="btn btn-danger btn-sm ">Update</a>
+                    </td>
+                    <td class="text-center ">
 
-                    <a href="{% url 'update-user-sales' u.id %}" class="btn btn-danger btn-sm">Update</a>
-                </td>
-                <td class="text-center">
+                        <a href="{% url 'user-stats' u.id %} " class="btn btn-danger btn-sm ">Analysis</a>
+                    </td>
 
-                    <a href="{% url 'user-stats' u.id %}" class="btn btn-danger btn-sm">Analysis</a>
-                </td>
+                </tr>
+                {% endfor %}
+        </table>
+    </div>
 
-            </tr>
-            {% endfor %}
-    </table>
 
-    <script>
-        $(document).ready(function() {
-            $('#myTable').DataTable();
-        });
-    </script>
     {% endblock content %}

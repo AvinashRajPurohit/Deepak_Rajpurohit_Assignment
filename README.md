@@ -1,6 +1,5 @@
-# Sales-Stats 
+# Sales-Stats
 
-### [See Application live](https://myapp963635.herokuapp.com/)
 
 ## Requirements
   * Python-version -: Python 3.9.9
